@@ -7,11 +7,11 @@
     "dev": "tsx watch server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "postinstall": "prisma generate",
     "test": "jest --experimental-vm-modules",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",
+    "postinstall": "prisma generate && prisma migrate deploy",
     "prisma:studio": "prisma studio"
   },
   "keywords": [],
