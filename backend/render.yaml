@@ -1,0 +1,30 @@
+# Render Blueprint file for easy deployment
+# This file helps configure services on Render
+
+services:
+  - type: web
+    name: crm-backend
+    env: node
+    buildCommand: cd backend && npm install && npx prisma generate && npm run build
+    startCommand: cd backend && npm start
+    envVars:
+      - key: DATABASE_URL
+        sync: false  # Set this manually in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: FRONTEND_URL
+        sync: false  # Set this to your frontend URL
+      - key: EMAIL
+        sync: false  # Set your Gmail address
+      - key: EMAIL_PASSWORD
+        sync: false  # Set your Gmail app password
+
+databases:
+  - name: crm-database
+    databaseName: crm_db
+    user: crm_user
+    plan: free  # Change to 'starter' or higher for production
