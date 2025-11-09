@@ -1,4 +1,4 @@
-import * as jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { Role } from '@prisma/client';
 
 const JWT_SECRET =
