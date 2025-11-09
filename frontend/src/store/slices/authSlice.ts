@@ -1,4 +1,8 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  createAsyncThunk,
+  PayloadAction as _PayloadAction,
+} from '@reduxjs/toolkit';
 import { authApi, User } from '../../api/authApi';
 
 interface AuthState {
@@ -25,9 +29,16 @@ export const login = createAsyncThunk(
   }
 );
 
+type Role = 'ADMIN' | 'MANAGER' | 'SALES_EXEC';
+
 export const register = createAsyncThunk(
   'auth/register',
-  async (userData: { email: string; name: string; password: string; role?: string }) => {
+  async (userData: {
+    email: string;
+    name: string;
+    password: string;
+    role?: Role;
+  }) => {
     const response = await authApi.register(userData);
     localStorage.setItem('token', response.data.token);
     localStorage.setItem('user', JSON.stringify(response.data.user));

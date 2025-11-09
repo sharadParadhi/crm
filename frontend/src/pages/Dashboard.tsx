@@ -1,6 +1,18 @@
 import { useEffect, useState } from 'react';
 import { dashboardApi, DashboardStats } from '../api/dashboardApi';
-import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 import toast from 'react-hot-toast';
 
 const Dashboard = () => {
@@ -53,8 +65,14 @@ const Dashboard = () => {
             boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
           }}
         >
-          <div style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>Total Leads</div>
-          <div style={{ fontSize: '32px', fontWeight: 'bold' }}>{stats.stats.totalLeads}</div>
+          <div
+            style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}
+          >
+            Total Leads
+          </div>
+          <div style={{ fontSize: '32px', fontWeight: 'bold' }}>
+            {stats.stats.totalLeads}
+          </div>
         </div>
         <div
           style={{
@@ -64,8 +82,16 @@ const Dashboard = () => {
             boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
           }}
         >
-          <div style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>New Leads</div>
-          <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#3498db' }}>{stats.stats.newLeads}</div>
+          <div
+            style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}
+          >
+            New Leads
+          </div>
+          <div
+            style={{ fontSize: '32px', fontWeight: 'bold', color: '#3498db' }}
+          >
+            {stats.stats.newLeads}
+          </div>
         </div>
         <div
           style={{
@@ -75,8 +101,16 @@ const Dashboard = () => {
             boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
           }}
         >
-          <div style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>Qualified</div>
-          <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#2ecc71' }}>{stats.stats.qualifiedLeads}</div>
+          <div
+            style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}
+          >
+            Qualified
+          </div>
+          <div
+            style={{ fontSize: '32px', fontWeight: 'bold', color: '#2ecc71' }}
+          >
+            {stats.stats.qualifiedLeads}
+          </div>
         </div>
         <div
           style={{
@@ -86,8 +120,16 @@ const Dashboard = () => {
             boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
           }}
         >
-          <div style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>Won</div>
-          <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#27ae60' }}>{stats.stats.wonLeads}</div>
+          <div
+            style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}
+          >
+            Won
+          </div>
+          <div
+            style={{ fontSize: '32px', fontWeight: 'bold', color: '#27ae60' }}
+          >
+            {stats.stats.wonLeads}
+          </div>
         </div>
         <div
           style={{
@@ -97,8 +139,16 @@ const Dashboard = () => {
             boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
           }}
         >
-          <div style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>Lost</div>
-          <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#e74c3c' }}>{stats.stats.lostLeads}</div>
+          <div
+            style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}
+          >
+            Lost
+          </div>
+          <div
+            style={{ fontSize: '32px', fontWeight: 'bold', color: '#e74c3c' }}
+          >
+            {stats.stats.lostLeads}
+          </div>
         </div>
         <div
           style={{
@@ -108,8 +158,14 @@ const Dashboard = () => {
             boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
           }}
         >
-          <div style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>Total Activities</div>
-          <div style={{ fontSize: '32px', fontWeight: 'bold' }}>{stats.stats.totalActivities}</div>
+          <div
+            style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}
+          >
+            Total Activities
+          </div>
+          <div style={{ fontSize: '32px', fontWeight: 'bold' }}>
+            {stats.stats.totalActivities}
+          </div>
         </div>
       </div>
 
@@ -164,8 +220,11 @@ const Dashboard = () => {
                 fill="#8884d8"
                 dataKey="count"
               >
-                {stats.charts.activitiesByType.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                {stats.charts.activitiesByType.map((_entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
                 ))}
               </Pie>
               <Tooltip />
@@ -191,7 +250,9 @@ const Dashboard = () => {
           }}
         >
           <h3 style={{ marginBottom: '20px' }}>Recent Leads</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div
+            style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
+          >
             {stats.recentLeads.map((lead: any) => (
               <div
                 key={lead.id}
@@ -203,7 +264,8 @@ const Dashboard = () => {
               >
                 <div style={{ fontWeight: 'bold' }}>{lead.title}</div>
                 <div style={{ fontSize: '12px', color: '#666' }}>
-                  Status: {lead.status} | Owner: {lead.owner?.name || 'Unassigned'}
+                  Status: {lead.status} | Owner:{' '}
+                  {lead.owner?.name || 'Unassigned'}
                 </div>
               </div>
             ))}
@@ -219,7 +281,9 @@ const Dashboard = () => {
           }}
         >
           <h3 style={{ marginBottom: '20px' }}>Recent Activities</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div
+            style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
+          >
             {stats.recentActivities.map((activity: any) => (
               <div
                 key={activity.id}
@@ -234,7 +298,9 @@ const Dashboard = () => {
                   Lead: {activity.lead?.title} | By: {activity.creator?.name}
                 </div>
                 {activity.note && (
-                  <div style={{ fontSize: '12px', marginTop: '5px' }}>{activity.note}</div>
+                  <div style={{ fontSize: '12px', marginTop: '5px' }}>
+                    {activity.note}
+                  </div>
                 )}
               </div>
             ))}

@@ -12,8 +12,10 @@ const LeadDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { currentLead, loading } = useSelector((state: RootState) => state.leads);
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { currentLead, loading } = useSelector(
+    (state: RootState) => state.leads
+  );
+  const { user: _user } = useSelector((state: RootState) => state.auth);
   const [showActivityModal, setShowActivityModal] = useState(false);
   const [activityData, setActivityData] = useState({
     type: 'NOTE' as 'NOTE' | 'CALL' | 'MEETING' | 'EMAIL',
@@ -140,13 +142,22 @@ const LeadDetail = () => {
           marginBottom: '20px',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            marginBottom: '20px',
+          }}
+        >
           <div>
             {editMode ? (
               <input
                 type="text"
                 value={editData.title}
-                onChange={(e) => setEditData({ ...editData, title: e.target.value })}
+                onChange={(e) =>
+                  setEditData({ ...editData, title: e.target.value })
+                }
                 style={{
                   fontSize: '24px',
                   fontWeight: 'bold',
@@ -159,11 +170,20 @@ const LeadDetail = () => {
             ) : (
               <h2 style={{ marginBottom: '10px' }}>{currentLead.title}</h2>
             )}
-            <div style={{ display: 'flex', gap: '10px', alignItems: 'center', marginTop: '10px' }}>
+            <div
+              style={{
+                display: 'flex',
+                gap: '10px',
+                alignItems: 'center',
+                marginTop: '10px',
+              }}
+            >
               {editMode ? (
                 <select
                   value={editData.status}
-                  onChange={(e) => setEditData({ ...editData, status: e.target.value })}
+                  onChange={(e) =>
+                    setEditData({ ...editData, status: e.target.value })
+                  }
                   style={{
                     padding: '5px 10px',
                     borderRadius: '20px',
@@ -242,14 +262,32 @@ const LeadDetail = () => {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginTop: '20px' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
           <div>
-            <label style={{ fontSize: '12px', color: '#666', display: 'block', marginBottom: '5px' }}>Company</label>
+            <label
+              style={{
+                fontSize: '12px',
+                color: '#666',
+                display: 'block',
+                marginBottom: '5px',
+              }}
+            >
+              Company
+            </label>
             {editMode ? (
               <input
                 type="text"
                 value={editData.company}
-                onChange={(e) => setEditData({ ...editData, company: e.target.value })}
+                onChange={(e) =>
+                  setEditData({ ...editData, company: e.target.value })
+                }
                 style={{
                   width: '100%',
                   padding: '10px',
@@ -262,12 +300,23 @@ const LeadDetail = () => {
             )}
           </div>
           <div>
-            <label style={{ fontSize: '12px', color: '#666', display: 'block', marginBottom: '5px' }}>Email</label>
+            <label
+              style={{
+                fontSize: '12px',
+                color: '#666',
+                display: 'block',
+                marginBottom: '5px',
+              }}
+            >
+              Email
+            </label>
             {editMode ? (
               <input
                 type="email"
                 value={editData.email}
-                onChange={(e) => setEditData({ ...editData, email: e.target.value })}
+                onChange={(e) =>
+                  setEditData({ ...editData, email: e.target.value })
+                }
                 style={{
                   width: '100%',
                   padding: '10px',
@@ -280,12 +329,23 @@ const LeadDetail = () => {
             )}
           </div>
           <div>
-            <label style={{ fontSize: '12px', color: '#666', display: 'block', marginBottom: '5px' }}>Phone</label>
+            <label
+              style={{
+                fontSize: '12px',
+                color: '#666',
+                display: 'block',
+                marginBottom: '5px',
+              }}
+            >
+              Phone
+            </label>
             {editMode ? (
               <input
                 type="tel"
                 value={editData.phone}
-                onChange={(e) => setEditData({ ...editData, phone: e.target.value })}
+                onChange={(e) =>
+                  setEditData({ ...editData, phone: e.target.value })
+                }
                 style={{
                   width: '100%',
                   padding: '10px',
@@ -309,7 +369,14 @@ const LeadDetail = () => {
           boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '20px',
+          }}
+        >
           <h3>Activity Timeline</h3>
           <button
             onClick={() => setShowActivityModal(true)}
@@ -338,13 +405,26 @@ const LeadDetail = () => {
                   borderRadius: '5px',
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '10px',
+                  }}
+                >
                   <div style={{ fontWeight: 'bold' }}>{activity.type}</div>
                   <div style={{ fontSize: '12px', color: '#666' }}>
                     {format(new Date(activity.createdAt), 'PPp')}
                   </div>
                 </div>
-                <div style={{ fontSize: '14px', color: '#666', marginBottom: '5px' }}>
+                <div
+                  style={{
+                    fontSize: '14px',
+                    color: '#666',
+                    marginBottom: '5px',
+                  }}
+                >
                   By: {activity.creator.name}
                 </div>
                 {activity.note && (
@@ -353,7 +433,11 @@ const LeadDetail = () => {
               </div>
             ))
           ) : (
-            <div style={{ textAlign: 'center', padding: '20px', color: '#666' }}>No activities yet</div>
+            <div
+              style={{ textAlign: 'center', padding: '20px', color: '#666' }}
+            >
+              No activities yet
+            </div>
           )}
         </div>
       </div>
@@ -385,10 +469,17 @@ const LeadDetail = () => {
             <h3 style={{ marginBottom: '20px' }}>Add Activity</h3>
             <form onSubmit={handleCreateActivity}>
               <div style={{ marginBottom: '15px' }}>
-                <label style={{ display: 'block', marginBottom: '5px' }}>Type</label>
+                <label style={{ display: 'block', marginBottom: '5px' }}>
+                  Type
+                </label>
                 <select
                   value={activityData.type}
-                  onChange={(e) => setActivityData({ ...activityData, type: e.target.value as any })}
+                  onChange={(e) =>
+                    setActivityData({
+                      ...activityData,
+                      type: e.target.value as any,
+                    })
+                  }
                   style={{
                     width: '100%',
                     padding: '10px',
@@ -403,10 +494,14 @@ const LeadDetail = () => {
                 </select>
               </div>
               <div style={{ marginBottom: '15px' }}>
-                <label style={{ display: 'block', marginBottom: '5px' }}>Note</label>
+                <label style={{ display: 'block', marginBottom: '5px' }}>
+                  Note
+                </label>
                 <textarea
                   value={activityData.note}
-                  onChange={(e) => setActivityData({ ...activityData, note: e.target.value })}
+                  onChange={(e) =>
+                    setActivityData({ ...activityData, note: e.target.value })
+                  }
                   required
                   rows={4}
                   style={{
@@ -417,7 +512,13 @@ const LeadDetail = () => {
                   }}
                 />
               </div>
-              <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '10px',
+                  justifyContent: 'flex-end',
+                }}
+              >
                 <button
                   type="button"
                   onClick={() => setShowActivityModal(false)}

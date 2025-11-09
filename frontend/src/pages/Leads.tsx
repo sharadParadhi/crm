@@ -8,7 +8,11 @@ import toast from 'react-hot-toast';
 
 const Leads = () => {
   const dispatch = useDispatch();
-  const { leads, loading, pagination } = useSelector((state: RootState) => state.leads);
+  const {
+    leads,
+    loading,
+    pagination: _pagination,
+  } = useSelector((state: RootState) => state.leads);
   const { user } = useSelector((state: RootState) => state.auth);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
@@ -57,7 +61,14 @@ const Leads = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '20px',
+        }}
+      >
         <h2>Leads</h2>
         <button
           onClick={() => setShowModal(true)}
@@ -88,12 +99,60 @@ const Leads = () => {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ background: '#f8f9fa' }}>
-                <th style={{ padding: '15px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Title</th>
-                <th style={{ padding: '15px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Company</th>
-                <th style={{ padding: '15px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Email</th>
-                <th style={{ padding: '15px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Status</th>
-                <th style={{ padding: '15px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Owner</th>
-                <th style={{ padding: '15px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Actions</th>
+                <th
+                  style={{
+                    padding: '15px',
+                    textAlign: 'left',
+                    borderBottom: '2px solid #ddd',
+                  }}
+                >
+                  Title
+                </th>
+                <th
+                  style={{
+                    padding: '15px',
+                    textAlign: 'left',
+                    borderBottom: '2px solid #ddd',
+                  }}
+                >
+                  Company
+                </th>
+                <th
+                  style={{
+                    padding: '15px',
+                    textAlign: 'left',
+                    borderBottom: '2px solid #ddd',
+                  }}
+                >
+                  Email
+                </th>
+                <th
+                  style={{
+                    padding: '15px',
+                    textAlign: 'left',
+                    borderBottom: '2px solid #ddd',
+                  }}
+                >
+                  Status
+                </th>
+                <th
+                  style={{
+                    padding: '15px',
+                    textAlign: 'left',
+                    borderBottom: '2px solid #ddd',
+                  }}
+                >
+                  Owner
+                </th>
+                <th
+                  style={{
+                    padding: '15px',
+                    textAlign: 'left',
+                    borderBottom: '2px solid #ddd',
+                  }}
+                >
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -102,7 +161,11 @@ const Leads = () => {
                   <td style={{ padding: '15px' }}>
                     <Link
                       to={`/leads/${lead.id}`}
-                      style={{ color: '#3498db', textDecoration: 'none', fontWeight: 'bold' }}
+                      style={{
+                        color: '#3498db',
+                        textDecoration: 'none',
+                        fontWeight: 'bold',
+                      }}
                     >
                       {lead.title}
                     </Link>
@@ -122,7 +185,9 @@ const Leads = () => {
                       {lead.status}
                     </span>
                   </td>
-                  <td style={{ padding: '15px' }}>{lead.owner?.name || 'Unassigned'}</td>
+                  <td style={{ padding: '15px' }}>
+                    {lead.owner?.name || 'Unassigned'}
+                  </td>
                   <td style={{ padding: '15px' }}>
                     <Link
                       to={`/leads/${lead.id}`}
@@ -172,11 +237,15 @@ const Leads = () => {
             <h3 style={{ marginBottom: '20px' }}>Create New Lead</h3>
             <form onSubmit={handleSubmit}>
               <div style={{ marginBottom: '15px' }}>
-                <label style={{ display: 'block', marginBottom: '5px' }}>Title *</label>
+                <label style={{ display: 'block', marginBottom: '5px' }}>
+                  Title *
+                </label>
                 <input
                   type="text"
                   value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, title: e.target.value })
+                  }
                   required
                   style={{
                     width: '100%',
@@ -187,11 +256,15 @@ const Leads = () => {
                 />
               </div>
               <div style={{ marginBottom: '15px' }}>
-                <label style={{ display: 'block', marginBottom: '5px' }}>Company</label>
+                <label style={{ display: 'block', marginBottom: '5px' }}>
+                  Company
+                </label>
                 <input
                   type="text"
                   value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, company: e.target.value })
+                  }
                   style={{
                     width: '100%',
                     padding: '10px',
@@ -201,11 +274,15 @@ const Leads = () => {
                 />
               </div>
               <div style={{ marginBottom: '15px' }}>
-                <label style={{ display: 'block', marginBottom: '5px' }}>Email</label>
+                <label style={{ display: 'block', marginBottom: '5px' }}>
+                  Email
+                </label>
                 <input
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   style={{
                     width: '100%',
                     padding: '10px',
@@ -215,11 +292,15 @@ const Leads = () => {
                 />
               </div>
               <div style={{ marginBottom: '15px' }}>
-                <label style={{ display: 'block', marginBottom: '5px' }}>Phone</label>
+                <label style={{ display: 'block', marginBottom: '5px' }}>
+                  Phone
+                </label>
                 <input
                   type="tel"
                   value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
                   style={{
                     width: '100%',
                     padding: '10px',
@@ -229,10 +310,17 @@ const Leads = () => {
                 />
               </div>
               <div style={{ marginBottom: '15px' }}>
-                <label style={{ display: 'block', marginBottom: '5px' }}>Status</label>
+                <label style={{ display: 'block', marginBottom: '5px' }}>
+                  Status
+                </label>
                 <select
                   value={formData.status}
-                  onChange={(e) => setFormData({ ...formData, status: e.target.value as Lead['status'] })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      status: e.target.value as Lead['status'],
+                    })
+                  }
                   style={{
                     width: '100%',
                     padding: '10px',
@@ -247,7 +335,13 @@ const Leads = () => {
                   <option value="LOST">LOST</option>
                 </select>
               </div>
-              <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '10px',
+                  justifyContent: 'flex-end',
+                }}
+              >
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
