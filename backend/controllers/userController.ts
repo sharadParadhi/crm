@@ -2,7 +2,11 @@ import { Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import { prisma } from '../prismaClient.js';
 import { AuthRequest } from '../types/index.js';
-import { NotFoundError, ValidationError, ForbiddenError } from '../utils/errors.js';
+import {
+  NotFoundError,
+  ValidationError,
+  ForbiddenError,
+} from '../utils/errors.js';
 import { Role } from '@prisma/client';
 
 export const getUsers = async (
@@ -122,7 +126,7 @@ export const updateUser = async (
     }
 
     const updateData: any = {};
-    
+
     if (name) updateData.name = name;
     if (email) {
       // Check if email is already taken by another user
@@ -201,8 +205,29 @@ export const deleteUser = async (
       throw new NotFoundError('User not found');
     }
 
-    await prisma.user.delete({
-      where: { id: parseInt(id) },
+    await prisma.$transaction(async (tx) => {
+      const userId = parseInt(id);
+
+      // 1. Delete activities created by user
+      await tx.activity.deleteMany({
+        where: { createdBy: userId },
+      });
+
+      // 2. Delete lead history where user made changes
+      await tx.leadHistory.deleteMany({
+        where: { changedBy: userId },
+      });
+
+      // 3. Remove ownership from leads (optional)
+      await tx.lead.updateMany({
+        where: { ownerId: userId },
+        data: { ownerId: null },
+      });
+
+      // 4. Now delete user
+      await tx.user.delete({
+        where: { id: userId },
+      });
     });
 
     res.json({
